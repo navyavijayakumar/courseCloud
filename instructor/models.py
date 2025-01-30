@@ -20,6 +20,9 @@ class InstructorProfile(models.Model):
     picture= models.ImageField(upload_to="profilepics",null=True,blank=True,default="profilepics/default.png")
     description=models.CharField(max_length=100,null=True)
 
+    def __str__(self):
+        return self.owner.username
+
 def create_instructor_profile(sender,instance,created,**kwargs):
 
     if created and instance.role=="instructor":
