@@ -3,53 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Student Portal - Sign In/Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="bg-gray-100 flex h-screen items-center justify-center p-4">
-        <div class="w-full max-w-md">
-            <div class="bg-white shadow-md rounded-md p-8">
-    
-                <img class="mx-auto h-12 w-auto" src="https://www.svgrepo.com/show/499664/user-happy.svg" alt="" />
-    
-                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                    Sign in to your account
-                </h2>
-    
-    
-                <form class="space-y-6 mt-4" action="#" method="POST">
+<body class="bg-purple-50 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4">
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200">
+                <button onclick="switchTab('signin')" id="signin-tab" class="flex-1 py-4 px-6 text-center text-purple-600 font-medium border-b-2 border-purple-600">
+                    Sign In
+                </button>
+                <button onclick="switchTab('signup')" id="signup-tab" class="flex-1 py-4 px-6 text-center text-gray-500 hover:text-purple-600">
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- Sign In Form -->
+            <div id="signin-form" class="p-6">
+                <form method="post" action="{%url 'signin'%}">
                     {%csrf_token%}
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">username</label>
-                        <div class="mt-1">
-                            <input name="username" type="email-address" autocomplete="email-address" required
-                                class="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">username</label>
+                            <input name="username" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="your@email.com"/>
                         </div>
-                    </div>
-
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                        <div class="mt-1">
-                            <input id="password" name="password" type="password" autocomplete="password" required
-                                class="px-2 py-3 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm" />
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input name="password" type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="••••••••"/>
                         </div>
-                    </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"/>
+                                <label class="ml-2 text-sm text-gray-600">Remember me</label>
+                            </div>
+                            <a href="#" class="text-sm text-purple-600 hover:text-purple-500">Forgot password?</a>
+                        </div>
 
-                    <div>
-                        <button type="submit"
-                            class="flex w-full justify-center rounded-md border border-transparent bg-sky-400 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">Sign
-                            In
+                        <button class="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
+                            <img src="/api/placeholder/24/24" alt="Google Logo" class="w-6 h-6"/>
+                            Sign in with Google
+                        </button>
+
+                        <div class="relative flex items-center my-2">
+                            <div class="flex-grow border-t border-gray-300"></div>
+                            <span class="flex-shrink mx-4 text-gray-600">or</span>
+                            <div class="flex-grow border-t border-gray-300"></div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signup-form" class="p-6 hidden">
+                <form method="post" action="{%url 'student-register'%}">
+                    {%csrf_token%}
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">username</label>
+                            <input name="username" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="John Doe"/>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input name="email" type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="your@email.com"/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input name="password1" type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="••••••••"/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                            <input name="password1" type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="••••••••"/>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"/>
+                            <label class="ml-2 text-sm text-gray-600">I agree to the Terms and Conditions</label>
+                        </div>
+                        <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
+                            Create Account
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        function switchTab(tab) {
+            const signinTab = document.getElementById('signin-tab');
+            const signupTab = document.getElementById('signup-tab');
+            const signinForm = document.getElementById('signin-form');
+            const signupForm = document.getElementById('signup-form');
+
+            if (tab === 'signin') {
+                signinTab.classList.add('text-purple-600', 'border-b-2', 'border-purple-600');
+                signupTab.classList.remove('text-purple-600', 'border-b-2', 'border-purple-600');
+                signinForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            } else {
+                signupTab.classList.add('text-purple-600', 'border-b-2', 'border-purple-600');
+                signinTab.classList.remove('text-purple-600', 'border-b-2', 'border-purple-600');
+                signupForm.classList.remove('hidden');
+                signinForm.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
-<form action="" method="post">
-    {%csrf_token%}
-    {{form}}
-    <button type="submit">signin</button>
-</form>
