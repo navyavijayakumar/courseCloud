@@ -3,6 +3,7 @@ from django.views.generic import View,FormView,CreateView,TemplateView
 from student.forms import StudentCreateForm,StudentLoginForm
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse_lazy
+from instructor.models import Course
 # Create your views here.
 class StudentCreateView(CreateView):
     # def get(self,request,*args,**kwargs):
@@ -43,7 +44,9 @@ class StudentSigninView(FormView):
         else:
             return render(request,"signin.html",{"form":form_instance})
         
-class IndexView(TemplateView):
-    template_name="index.html"
+class IndexView(View):
+    def get(self,request,*args,**kwargs):
+        all_courses=Course.objects.all()
+        return render(request,"index.html",{"courses":all_courses})
 
 
