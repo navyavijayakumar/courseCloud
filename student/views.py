@@ -50,3 +50,8 @@ class IndexView(View):
         return render(request,"index.html",{"courses":all_courses})
 
 
+class CourseDetailView(View):
+    def get(self,request,*args,**kwargs):
+        id=kwargs.get("pk")
+        course_instance=Course.objects.get(id=id)
+        return render(request,"course_detail.html",{"course":course_instance})

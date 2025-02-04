@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+        
+        <div>
+            <h1>Course Details</h1>
+            <p>Title: {{course.title}}</p>
+            <p>Description: {{course.description}}</p>
+            <p>price: {{course.price}}</p>
+            <p>Instructor: {{course.owner.first_name}} {{course.owner.last_name}}</p>
+            <hr>
+            {%for module in course.modules.all%}
+            <h1 class="mb-3 mt-3">{{module.order}}-{{module.title}}</h1>
+
+                {%for lesson in module.lessons.all%}
+                    <h1 class="ms-5">{{lesson.order}}-{{lesson.title}}</h1>
+                {%endfor%}
+
+            {%endfor%}
+        </div>
+{%endblock%}
