@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="bg-purple-700 fixed w-full z-20 top-0 left-0 ">
+    <nav class="bg-purple-700 fixed w-full z-20 top-0 left-0 sticky">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center">
                 <span class="self-center text-2xl font-semibold text-white">courseCloud</span>
@@ -29,7 +29,7 @@
             <div class="flex items-center space-x-6 md:order-2">
                 <!-- My Courses -->
                 <div class="relative group">
-                    <a href="#" class="text-white hover:text-purple-200">
+                    <a href="{%url 'mycourses'%}" class="text-white hover:text-purple-200">
                         <i class="fas fa-book-open text-xl"></i>
                         <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
                         <span class="hidden group-hover:block absolute top-full right-0 mt-2 bg-white text-purple-700 text-sm py-1 px-2 rounded shadow-lg whitespace-nowrap">My Courses</span>
@@ -47,9 +47,9 @@
 
                 <!-- Cart -->
                 <div class="relative group">
-                    <a href="#" class="text-white hover:text-purple-200">
+                    <a href="{%url 'cart-summary'%}" class="text-white hover:text-purple-200">
                         <i class="fas fa-shopping-cart text-xl"></i>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{request.user.basket.all.count}}</span>
                         <span class="hidden group-hover:block absolute top-full right-0 mt-2 bg-white text-purple-700 text-sm py-1 px-2 rounded shadow-lg whitespace-nowrap">Cart</span>
                     </a>
                 </div>
@@ -59,10 +59,10 @@
         </div>
     </nav>
     
-<div class="mt-20">
+
     {%block main_block%}
 
     {%endblock%}
-</div>
+
 </body>
 </html>
